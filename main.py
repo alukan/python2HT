@@ -7,6 +7,12 @@ class Alien:
         self.y_coor = y_cor
         Alien.alien_counter += 1
 
+    def hit(self):
+        self.health -= 1
+
 
 
 alien = Alien(2, 0)
+print(alien.health)
+alien.hit()
+print(alien.health)
