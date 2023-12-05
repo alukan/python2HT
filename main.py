@@ -23,6 +23,14 @@ class Alien:
     def total_aliens_created(self):
         return Alien.alien_counter
 
+
+def new_aliens_collection(coordinates):
+    aliens = []
+    for i in coordinates:
+        aliens.append(Alien(i[0], i[1]))
+    return aliens
+
+
 alien = Alien(2, 0)
 print(alien.health)
 alien.hit()
