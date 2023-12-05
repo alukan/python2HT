@@ -17,7 +17,8 @@ class Alien:
         self.x_coor = new_x
         self.y_coor = new_y
 
-
+    def collision_detection(self, other_alien):
+        pass
 
 alien = Alien(2, 0)
 print(alien.health)
