@@ -13,6 +13,10 @@ class Alien:
     def is_alive(self):
         return (self.health > 0)
 
+    def teleport(self, new_x, new_y):
+        self.x_coor = new_x
+        self.y_coor = new_y
+
 
 
 alien = Alien(2, 0)
