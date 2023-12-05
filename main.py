@@ -20,6 +20,9 @@ class Alien:
     def collision_detection(self, other_alien):
         pass
 
+    def total_aliens_created(self):
+        return Alien.alien_counter
+
 alien = Alien(2, 0)
 print(alien.health)
 alien.hit()
