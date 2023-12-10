@@ -18,9 +18,9 @@ def form():
 
     if request.method == 'POST':
         user_input = request.form.get('user_input')
+        target_language = request.form.get('target_language')
 
-        translation = translate_client.translate(user_input, target_language='es')
-        print(*translation)
+        translation = translate_client.translate(user_input, target_language=target_language)
         translated_text = translation['translatedText']
 
     return render_template('form.html', translated_text=translated_text)
