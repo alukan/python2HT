@@ -2,3 +2,5 @@
 venv/
 
 ./key.json
+
+/static/
