@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Page</title>
+</head>
+<body>
+    <h1>Translation Form</h1>
+    <form action="/form" method="post">
+        <label for="user_input">Enter something:</label>
+        <input type="text" id="user_input" name="user_input" required>
+        <button type="submit">Translate</button>
+    </form>
+
+    {% if translated_text %}
+        <p>Translated Text: {{ translated_text }}</p>
+    {% endif %}
+</body>
+</html>
