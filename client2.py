@@ -1,5 +1,6 @@
 import pygame
 import socket
+import json
 from threading import Thread
 # pygame setup
 pygame.init()
@@ -7,16 +8,20 @@ screen = pygame.display.set_mode((800, 700))
 clock = pygame.time.Clock()
 running = True
 
-circle_pos = pygame.Vector2(screen.get_width() / 3, screen.get_height() / 3)
-other_player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
+try:
+    with open("client2_pos.json", "r") as json_file:
+        loaded_data = json.load(json_file)
+    circle_pos = pygame.Vector2(loaded_data["x"], loaded_data["y"])
+except:
+    circle_pos = pygame.Vector2(50, 50)
+
+other_player_pos = pygame.Vector2(0, 0)
 
 def handle_server(connected_socket):
-    while True:
+    while running:
         received_data = connected_socket.recv(4096).decode().split("; ")
         other_player_pos.x = float(received_data[0])
         other_player_pos.y = float(received_data[1])
-        if(not running):
-            break
 
 socket_one = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -24,7 +29,10 @@ port = 33124
 server_address = '127.0.0.1'
 
 socket_one.connect((server_address, port))
-
+socket_one.send((f"{circle_pos.x}; {circle_pos.y}").encode())
+received_data = socket_one.recv(4096).decode().split("; ")
+other_player_pos.x = float(received_data[0])
+other_player_pos.y = float(received_data[1])
 t1 = Thread(target=handle_server, args=[socket_one])
 t1.start()
 
@@ -33,6 +41,13 @@ while running:
     # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            with open("client2_pos.json", "w") as json_file:
+                data = {
+                    "x":  circle_pos.x,
+                    "y":  circle_pos.y
+                }
+                json.dump(data, json_file)
+            socket_one.send(("stop").encode())
             running = False
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("black")
