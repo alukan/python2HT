@@ -1,0 +1,18 @@
+{
+    "accounts": {
+      "user_id:hash:phone_number": "chat_id_int:delay_in_int"
+    },
+    "message": "message",
+    "answer": "NO Reply",
+    "delay_messages": {
+      "delay_between_accounts": 15,
+      "delay_between_messages": [15, 20]
+    },
+    "logging": {
+      "enable": "true"
+    },
+    "pathes": {
+      "project_path": "C:\\harbour\\python2\\final_project\\Bot"
+    }
+  }
+  
